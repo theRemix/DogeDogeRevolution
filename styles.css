@@ -6,6 +6,27 @@ body{
   width: 500px;
   height: 650px;
   background: white;
-  margin: auto;
+  margin-left: 20px;
   margin-top: 10px;
+}
+
+#control_arrow_u,
+#control_arrow_d,
+#control_arrow_l,
+#control_arrow_r{
+  position: absolute;
+  top: 20px;
+}
+
+#control_arrow_l{
+  left: 60px;
+}
+#control_arrow_r{
+  left: 180px;
+}
+#control_arrow_u{
+  left: 300px;
+}
+#control_arrow_d{
+  left: 420px;
 }
