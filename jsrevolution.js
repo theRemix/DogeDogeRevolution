@@ -1,7 +1,23 @@
 var frame = 0; // game "frame" counter
 var arrow_spawn_rate = 24; // how many frames until we spawn an arrow
 var arrow_speed = 6;
-var $stage;
+var $stage,
+    $perfect,
+    $good,
+    $bad,
+    $missed;
+var scores = {
+  perfect : 0,
+  good : 0,
+  bad : 0,
+  missed : 0
+};
+var SCORETYPE = {
+  PERFECT : "PERFECT",
+  GOOD : "GOOD",
+  BAD : "BAD",
+  MISSED : "MISSED"
+}
 var arrows = [];
 var DIRECTIONS = ["u","d","l","r"];
 var TARGET_POSITION = 20;
@@ -30,8 +46,30 @@ function gameLoop () {
   } 
 }
 
+function updateScore (scoreType) {
+  switch(scoreType){
+    case SCORETYPE.MISSED:
+      scores.missed++;
+      $missed.html(scores.missed);
+      break;
+    case SCORETYPE.BAD:
+      scores.bad++;
+      $bad.html(scores.bad);
+      break;
+    case SCORETYPE.GOOD:
+      scores.good++;
+      $good.html(scores.good);
+      break;
+    case SCORETYPE.PERFECT:
+      scores.perfect++;
+      $perfect.html(scores.perfect);
+      break;
+  }
+
+}
+
 function missed () {
-  console.log("MISSED");
+  updateScore(SCORETYPE.MISSED);
 }
 
 function spawnArrow() {
@@ -49,13 +87,14 @@ function asplodeArrow (arrow) {
   if(arrow.img.position().top > TARGET_POSITION-TARGET_PERFECT &&
      arrow.img.position().top < TARGET_POSITION+TARGET_PERFECT){
     // PERFECT!
-    console.log("PERFECT");
+    updateScore(SCORETYPE.PERFECT);
+
   }else if(arrow.img.position().top > TARGET_POSITION-TARGET_GOOD &&
            arrow.img.position().top < TARGET_POSITION+TARGET_GOOD){
     // GOOD
-    console.log("GOOD");
+    updateScore(SCORETYPE.GOOD);
   }else{
-    console.log("BAD");
+    updateScore(SCORETYPE.BAD);
   }
 
   // ASPLODE
@@ -90,10 +129,14 @@ $(function(){
 
   // instantiate objects
   $stage = $("#stage");
-  $control_arrow_u = $('#control_arrow_u');
-  $control_arrow_d = $('#control_arrow_d');
-  $control_arrow_l = $('#control_arrow_l');
-  $control_arrow_r = $('#control_arrow_r');
+  // $control_arrow_u = $('#control_arrow_u');
+  // $control_arrow_d = $('#control_arrow_d');
+  // $control_arrow_l = $('#control_arrow_l');
+  // $control_arrow_r = $('#control_arrow_r');
+  $perfect = $('#perfect span');
+  $good = $('#good span');
+  $bad = $('#bad span');
+  $missed = $('#missed span');
 
   // game loop
   // shim layer with setTimeout fallback
