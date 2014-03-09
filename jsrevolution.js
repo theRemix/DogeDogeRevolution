@@ -63,6 +63,7 @@ function asplodeArrow (arrow) {
     if(arrows[i] == arrow){
       var del = arrows[i];
       arrows.splice(i,1);
+      del.asplode();
       del.destroy();  
     }
   };
@@ -119,7 +120,7 @@ $(function(){
   // put arrows on stage
 
   // arrow listeners
-  $(document).keyup(function(event){
+  $(document).keydown(function(event){
 
     // check if any arrow is within 40px of the target position
     for (var i = arrows.length - 1; i >= 0; i--) {
@@ -137,6 +138,14 @@ $(function(){
 /*
 
   CLASSES
+
+  arrow -> Arrow
+  arrow.direction
+  arrow.img  -> $jq object
+  arrow.step()
+  arrow.destroy()
+  arrow.asplode()
+
 
 */
 
@@ -168,16 +177,27 @@ function Arrow(direction){
     left: laneX+"px"
   });
 
-  // random x position
-
-
 }
 Arrow.prototype.step = function() {
   this.img.css('top','-='+arrow_speed+'px');  
 };
 Arrow.prototype.destroy = function () {
   this.img.remove();
-}
+};
+Arrow.prototype.asplode = function () {
+  // show a temporary gif
+  var explode = $("<img src='images/explode1.gif'>");
+  explode.css({
+    position:"absolute",
+    top: this.img.position().top-20+"px",
+    left: this.img.position().left-30+"px"
+  });
+  $stage.append(explode);
+
+  setTimeout(function(){
+    explode.remove();
+  }, 450);
+};
 
 
 
