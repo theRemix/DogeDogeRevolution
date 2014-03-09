@@ -5,7 +5,11 @@ var $stage,
     $perfect,
     $good,
     $bad,
-    $missed;
+    $missed,
+    $alert_perfect,
+    $alert_good,
+    $alert_bad,
+    $alert_missed;
 var scores = {
   perfect : 0,
   good : 0,
@@ -23,7 +27,9 @@ var DIRECTIONS = ["u","d","l","r"];
 var TARGET_POSITION = 20;
 var TARGET_BAD = 40; // away from TARGET_POSITION
 var TARGET_GOOD = 20; 
-var TARGET_PERFECT = 5;
+var TARGET_PERFECT = 10;
+var STAGE_WIDTH = 500,
+    STAGE_HEIGHT = 650;
 
 // 60fps
 function gameLoop () {
@@ -51,18 +57,34 @@ function updateScore (scoreType) {
     case SCORETYPE.MISSED:
       scores.missed++;
       $missed.html(scores.missed);
+      $alert_missed.css({ left : (Math.random()*STAGE_WIDTH)+"px", top : (Math.random()*STAGE_HEIGHT)+"px"}).show();
+      $alert_bad.hide();
+      $alert_good.hide();
+      $alert_perfect.hide();
       break;
     case SCORETYPE.BAD:
       scores.bad++;
       $bad.html(scores.bad);
+      $alert_bad.css({ left : (Math.random()*STAGE_WIDTH)+"px", top : (Math.random()*STAGE_HEIGHT)+"px"}).show();
+      $alert_missed.hide();
+      $alert_good.hide();
+      $alert_perfect.hide();
       break;
     case SCORETYPE.GOOD:
       scores.good++;
       $good.html(scores.good);
+      $alert_good.css({ left : (Math.random()*STAGE_WIDTH)+"px", top : (Math.random()*STAGE_HEIGHT)+"px"}).show();
+      $alert_bad.hide();
+      $alert_missed.hide();
+      $alert_perfect.hide();
       break;
     case SCORETYPE.PERFECT:
       scores.perfect++;
       $perfect.html(scores.perfect);
+      $alert_perfect.css({ left : (Math.random()*STAGE_WIDTH)+"px", top : (Math.random()*STAGE_HEIGHT)+"px"}).show();
+      $alert_bad.hide();
+      $alert_good.hide();
+      $alert_missed.hide();
       break;
   }
 
@@ -137,6 +159,16 @@ $(function(){
   $good = $('#good span');
   $bad = $('#bad span');
   $missed = $('#missed span');
+
+  $alert_perfect = $('<img src="images/perfect.png" alt="" />').hide().css("position","absolute");
+  $alert_good = $('<img src="images/good.png" alt="" />').hide().css("position","absolute");
+  $alert_bad = $('<img src="images/bad.png" alt="" />').hide().css("position","absolute");
+  $alert_missed = $('<img src="images/missed.png" alt="" />').hide().css("position","absolute");
+  
+  $stage.append($alert_perfect);
+  $stage.append($alert_good);
+  $stage.append($alert_bad);
+  $stage.append($alert_missed);
 
   // game loop
   // shim layer with setTimeout fallback
