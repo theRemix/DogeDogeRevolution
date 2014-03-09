@@ -1,18 +1,27 @@
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 200;
-    margin: 50px 0;
+    /*margin: 50px 0;*/
     padding: 0;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+    background: #333;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #outer {
-    width: 600px;
-    margin: 0 auto;    
+    /*width: 600px;*/
+    margin: 0 auto;
+}
+
+#game{
+    float: left;
+}
+
+#leaderboard{
+    float: right;
 }
 
 .player {
@@ -60,3 +69,42 @@ body {
 .inc {
   cursor: pointer;
 }
+
+#stage{
+  width: 500px;
+  height: 650px;
+  background: white;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+#control_arrow_u,
+#control_arrow_d,
+#control_arrow_l,
+#control_arrow_r{
+  position: absolute;
+  top: 20px;
+}
+
+#control_arrow_l{
+  left: 60px;
+}
+#control_arrow_r{
+  left: 180px;
+}
+#control_arrow_u{
+  left: 300px;
+}
+#control_arrow_d{
+  left: 420px;
+}
+
+#score{
+  position: absolute;
+  left: 380px;
+  top: 400px;
+}
+#perfect{
+
+}
+

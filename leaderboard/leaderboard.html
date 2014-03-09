@@ -1,12 +1,33 @@
 <head>
   <title>Leaderboard</title>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="jsrevolution.js"></script>
 </head>
 
 <body>
   <div id="outer">
-    {{> leaderboard}}
+    <div id="game">
+    {{> game}}
+    </div>
+    <div id="leaderboard">
+      {{> leaderboard}}
+    </div>
   </div>
 </body>
+
+<template name="game">
+  <div id="stage"></div>
+  <img id="control_arrow_l" src="images/left.png" alt="" />
+  <img id="control_arrow_r" src="images/right.png" alt="" />
+  <img id="control_arrow_u" src="images/up.png" alt="" />
+  <img id="control_arrow_d" src="images/down.png" alt="" />
+  <div id="score">
+    <p id="perfect">wow perfect <span></span></p>
+    <p id="good">such good <span></span></p>
+    <p id="bad">so bad <span></span></p>
+    <p id="missed">very missed <span></span></p>
+  </div>
+</template>
 
 <template name="leaderboard">
   <div class="leaderboard">
