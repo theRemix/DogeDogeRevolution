@@ -1,6 +1,6 @@
 var frame = 0; // game "frame" counter
-var arrow_spawn_rate = 50; // how many frames until we spawn an arrow
-var arrow_speed = 5;
+var arrow_spawn_rate = 24; // how many frames until we spawn an arrow
+var arrow_speed = 6;
 var $stage;
 var arrows = [];
 var DIRECTIONS = ["u","d","l","r"];
@@ -170,7 +170,7 @@ function Arrow(direction){
       break;
   }
 
-  this.img = $("<img src='images/"+direction+".gif'>");
+  this.img = $("<img src='images/"+direction+".png'>");
   this.img.css({
     position:"absolute",
     top: "560px",
